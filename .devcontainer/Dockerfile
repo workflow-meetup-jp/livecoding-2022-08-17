@@ -18,3 +18,8 @@ ARG zatsu_ver=v1.0.6
 RUN curl -fLSs https://github.com/tom-tan/zatsu-cwl-generator/releases/download/${zatsu_ver}/zatsu-cwl-generator-${zatsu_ver}-linux-x86_64.tar.xz | \
     tar Jxvf - && \
     mv zatsu-cwl-generator /usr/local/bin
+
+# install pup
+RUN curl -LO https://github.com/ericchiang/pup/releases/download/v0.4.0/pup_v0.4.0_linux_amd64.zip && \
+    unzip pup_v0.4.0_linux_amd64.zip && \
+    install -m 755 pup /usr/local/bin
