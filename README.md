@@ -50,10 +50,14 @@ We want to pick up the following contents from `https://workflow-meetup-jp.githu
 その次、2022-09-xx(Wed), xx(Thu)を予定</p>
 ```
 ```console
-$ curl -s https://workflow-meetup-jp.github.io/ | pup 'div[class="home"] > p > a[href="https://github.com/workflow-meetup-jp/workflow-meetup/wiki/20220817-18"]'
-<a href="https://github.com/workflow-meetup-jp/workflow-meetup/wiki/20220817-18">
- 次回ミートアップは2022-08-17(Wed), 18(Thu) 13:00-19:00(JST)
-</a>
+$ curl -s https://workflow-meetup-jp.github.io/ | pup 'div[class="home"] > p > a[href="https://github.com/workflow-meetup-jp/workflow-meetup/wiki/20220817-18"] text{}'
+次回ミートアップは2022-08-17(Wed), 18(Thu) 13:00-19:00(JST)
+```
+
+```console
+$ curl -LO https://workflow-meetup-jp.github.io/index.html
+$ pup 'div[class="home"] > p > a[href="https://github.com/workflow-meetup-jp/workflow-meetup/wiki/20220817-18"] text{}' -f index.html
+次回ミートアップは2022-08-17(Wed), 18(Thu) 13:00-19:00(JST)
 ```
 
 ## How to run tests

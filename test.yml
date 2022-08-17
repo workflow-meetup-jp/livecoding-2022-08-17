@@ -1,9 +1,9 @@
-- job: job/cat-job.yml
-  tool: cwl/cat.cwl
+- job: job/pup-job.yml
+  tool: cwl/pup.cwl
   output:
     out:
       class: File
       basename: output.txt
-      checksum: sha1$2af1a59da667eb4aedb182248c1d91741df7e24d
-      size: 31
-  doc: Template for cwltest
+      checksum: sha1$f79f0c421b757ab0650382cb716d45070e0dd186
+      size: 69
+  doc: Example of pup with workflow meetup website
