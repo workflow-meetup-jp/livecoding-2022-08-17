@@ -3,32 +3,58 @@ This is the result of live coding held on 2022/8/17 in workflow meetup.
 
 [![Actions Status](https://github.com/workflow-meetup-jp/livecoding-2022-08-17/workflows/CI/badge.svg)](https://github.com/workflow-meetup-jp/livecoding-2022-08-17/actions)
 
+### This tools goal
+
+Get Next Meeting date from [Workflow meetup](https://workflow-meetup-jp.github.io/) web page.
+
 ## Requirements
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [Remote - Container extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 - git
 - Docker
+- VSCode Live Share plugin (optional: for  collaboration)
 
-### Optional 
+## Live coding target
+- [pup](https://github.com/ericchiang/pup)
 
-- VSCode Live Share plugin ( for  collaborate )
 
-##
 
-## How to use
-- Push the `Use this template` button in this repository and create a new repository for you,
-- Clone it to your local machine, and
-- Open the cloned repository with remote container extension of VSCode.
-- Have fun!
+## Install pup
 
-## What is provided by this template?
-- A container setting for VSCode. It provides the followings:
-  - basic tools such as `cwltool`, `cwl-runner`, `cwltest` and `nodejs` (for `InlineJavascriptRequirement`)
-  - `docker` (you can use it without any configurations)
-  - [Rabix Benten](https://github.com/rabix/benten) and [zatsu-cwl-generator](https://github.com/tom-tan/zatsu-cwl-generator) to help writing CWL documents
-  - [Live Share extension](https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare) for live coding
-- A template for `cwltest`
-- Templates for CI services (described below)
+```console
+$ curl -LO https://github.com/ericchiang/pup/releases/download/v0.4.0/pup_v0.4.0_linux_amd64.zip
+$ unzip pup_v0.4.0_linux_amd64.zip
+$ ./pup -h
+Usage
+    pup [flags] [selectors] [optional display function]
+Version
+    0.4.0
+Flags
+    -c --color         print result with color
+    -f --file          file to read from
+    -h --help          display this help
+    -i --indent        number of spaces to use for indent or character
+    -n --number        print number of elements selected
+    -l --limit         restrict number of levels printed
+    -p --plain         don't escape html
+    --pre              preserve preformatted text
+    --charset          specify the charset for pup to use
+    --version          display version
+$ sudo mv pup /usr/local/bin
+```
+
+## Command example for pup
+We want to pick up the following contents from `https://workflow-meetup-jp.github.io/`.
+```html
+<p><a href="https://github.com/workflow-meetup-jp/workflow-meetup/wiki/20220817-18">次回ミートアップは2022-08-17(Wed), 18(Thu) 13:00-19:00(JST)</a>
+その次、2022-09-xx(Wed), xx(Thu)を予定</p>
+```
+```console
+$ curl -s https://workflow-meetup-jp.github.io/ | pup 'div[class="home"] > p > a[href="https://github.com/workflow-meetup-jp/workflow-meetup/wiki/20220817-18"]'
+<a href="https://github.com/workflow-meetup-jp/workflow-meetup/wiki/20220817-18">
+ 次回ミートアップは2022-08-17(Wed), 18(Thu) 13:00-19:00(JST)
+</a>
+```
 
 ## How to run tests
 
