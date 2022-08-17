@@ -44,43 +44,17 @@ $ sudo mv pup /usr/local/bin
 ```
 
 ## Command example for pup
-We want to pick up the following contents from `https://workflow-meetup-jp.github.io/`.
-```html
-<p><a href="https://github.com/workflow-meetup-jp/workflow-meetup/wiki/20220817-18">次回ミートアップは2022-08-17(Wed), 18(Thu) 13:00-19:00(JST)</a>
-その次、2022-09-xx(Wed), xx(Thu)を予定</p>
-```
-```console
-$ curl -s https://workflow-meetup-jp.github.io/ | pup 'div[class="home"] > p > a[href="https://github.com/workflow-meetup-jp/workflow-meetup/wiki/20220817-18"] text{}'
-次回ミートアップは2022-08-17(Wed), 18(Thu) 13:00-19:00(JST)
-```
+Here is an example to pick up the next meetup information from `https://workflow-meetup-jp.github.io/`.
 
 ```console
 $ curl -LO https://workflow-meetup-jp.github.io/index.html
-$ pup 'div[class="home"] > p > a[href="https://github.com/workflow-meetup-jp/workflow-meetup/wiki/20220817-18"] text{}' -f index.html
+$ pup "div.home p:nth-child(3) a text{}" -f index.html
 次回ミートアップは2022-08-17(Wed), 18(Thu) 13:00-19:00(JST)
 ```
 
 ## How to run tests
-
-- Edit `test.yml`
-  - Each entry consists of the input CWL file in `tool` field, the input parameter file in `job` field and the expected output object in `output` field (`doc` field is optional).
-  - Here is an example entry:
-  ```yaml
-  - job: job/cat-job.yml
-    tool: cwl/cat.cwl
-    output:
-      out:
-        class: File
-        basename: output.txt
-        checksum: sha1$2af1a59da667eb4aedb182248c1d91741df7e24d
-        size: 31
-    doc: Template for cwltest
-  ```
-  - You can add new entries for your tools and workflows. I assume that the CWL files are put in `cwl` directory, the input parameter files are put in `job` directory, and the example inputs are put in `data` directory.
-- Run test with the following command
-  ```console
-  $ cwltest --test test.yml
-  Test [1/1] Template for cwltest
-  ...
-  All tests passed
-  ```
+```console
+ $ cwltest --test test.yml 
+Test [1/1] Example of pup with workflow meetup website
+All tests passed
+```
