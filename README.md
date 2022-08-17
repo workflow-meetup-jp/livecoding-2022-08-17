@@ -47,8 +47,8 @@ $ sudo mv pup /usr/local/bin
 Here is an example to pick up the next meetup information from `https://workflow-meetup-jp.github.io/`.
 
 ```console
-$ curl -LO https://workflow-meetup-jp.github.io/index.html
-$ pup "div.home p:nth-child(3) a text{}" -f index.html
+$ curl -L https://workflow-meetup-jp.github.io/ -o data/index.html
+$ pup "div.home p:nth-child(3) a text{}" -f data/index.html
 次回ミートアップは2022-08-17(Wed), 18(Thu) 13:00-19:00(JST)
 ```
 
