@@ -5,12 +5,11 @@ class: CommandLineTool
 #     dockerPull: alpine:latest
 baseCommand: pup
 arguments:
-  - "div[class=\"home\"] > p > a[href=\"$(inputs.url)\"] text{}"
+  # div.home <h1>1st</h1> <h2>2nd</h2> <p><a>3rd</a></p>
+  - "div.home p:nth-child(3) a text{}"
   - -f
   - $(inputs.file)
 inputs:
-  - id: url
-    type: string
   - id: file
     type: File
 outputs:
